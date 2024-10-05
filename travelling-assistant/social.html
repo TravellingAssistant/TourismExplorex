@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Share Buttons</title>
+    <style>
+        /* Main body styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0; /* Plain background color */
+            margin: 0;
+        }
+
+        /* Container styling with transitions */
+        .share-container {
+            text-align: center;
+            padding: 30px;
+            /* Removed background color and shadow */
+        }
+
+        /* Smooth hover effect for container */
+        .share-container:hover {
+            transform: translateY(-15px);
+        }
+
+        /* Button styling with transition */
+        button {
+            background-color: #0077b5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0, 119, 181, 0.4);
+        }
+
+        /* Button hover transition */
+        button:hover {
+            background-color: #005582;
+            box-shadow: 0 8px 25px rgba(0, 119, 181, 0.5);
+        }
+
+        /* Social Icons Container */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+        }
+
+        /* Smooth visibility and animation of icons */
+        .share-container:hover .social-icons {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+
+        /* Individual Icon Styles */
+        .icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        /* Smooth hover effect for icons */
+        .icon svg {
+            width: 36px;
+            height: 36px;
+            fill: white;
+            transition: transform 0.4s ease;
+        }
+
+        .icon:hover svg {
+            transform: rotate(10deg);
+        }
+
+        /* Color customization for different icons */
+        .facebook {
+            background-color: #3b5998;
+        }
+
+        .instagram {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        }
+
+        .twitter {
+            background-color: #000000;
+        }
+
+        .telegram {
+            background-color: #0088cc;
+        }
+
+        /* Scale and shadow effect when icons are hovered */
+        .icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .social-icons {
+                gap: 15px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+
+            .icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .icon svg {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="share-container">
+        <button id="share-btn">Share this page</button>
+        <div id="social-icons" class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=61566558724186" target="_blank" class="icon facebook">
+                <svg viewBox="0 0 126.22 246"><path d="M173.6,27h35.92V70.19h-29.7c-15,2.39-14,19.79-14,19.79v29.33h47.27l-7.05,47.52H166.33V273H119.19V166.09H86.89V119.31h32.3V87.74A68.5,68.5,0,0,1,127,55.49c5.27-9.87,14-20.18,28.41-25.47A53,53,0,0,1,173.6,27Z" transform="translate(-86.89 -27)"/></svg>
+            </a>
+            <a href="https://www.instagram.com/travelling_assiatant15?igsh=MWVud3djOG1mYzc3" target="_blank" class="icon instagram">
+                <svg viewBox="0 0 246.15 246.15"><path d="M201,51.5A47.49,47.49,0,0,1,248.41,99V200.88A47.49,47.49,0,0,1,201,248.32H99a47.49,47.49,0,0,1-47.44-47.44V99A47.49,47.49,0,0,1,99,51.5H201m0-24.66H99A72.11,72.11,0,0,0,26.92,99V200.88A72.12,72.12,0,0,0,99,273H201a72.12,72.12,0,0,0,72.11-72.11V99A72.11,72.11,0,0,0,201,26.84Z" transform="translate(-26.92 -26.84)"/><path d="M150,124.34a25.57,25.57,0,1,1-25.57,25.57A25.6,25.6,0,0,1,150,124.34m0-24.66a50.24,50.24,0,1,0,50.23,50.23A50.23,50.23,0,0,0,150,99.68Z" transform="translate(-26.92 -26.84)"/><circle class="cls-1" cx="189.98" cy="55.33" r="13.81"/></svg>
+            </a>
+            <a href="https://x.com/TRAVELLING_15" target="_blank" class="icon twitter">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fa-brands fa-x-twitter" viewBox="0 0 16 16">
+  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+</svg>
+            </a>
+            <a href="https://t.me/+IyAK0C0UnxI5ZDE1" target="_blank" class="icon telegram">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="36" height="36">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906q-1.168.486-4.666 2.01-.567.225-.595.442c-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294q.39.01.868-.32 3.269-2.206 3.374-2.23c.05-.012.12-.026.166.016s.042.12.037.141c-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8 8 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629q.14.092.27.187c.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.4 1.4 0 0 0-.013-.315.34.34 0 0 0-.114-.217.53.53 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

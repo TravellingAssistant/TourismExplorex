@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot</title>
+</head>
+<body>
+<div class="container">
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search..." onkeydown="handleSearch(event)">
+    </div>
+
+    <div class="chatbox">
+        <div class="chatbox__support">
+            <div class="chatbox__header">
+                <!-- Existing chatbox header content -->
+            </div>
+            <div class="chatbox__messages">
+                <!-- Existing chatbox messages content -->
+            </div>
+            <div class="chatbox__footer">
+                <!-- Existing chatbox footer content -->
+            </div>
+        </div>
+        <div class="chatbox__button">
+            <button><img src="{{ url_for('static', filename='images/chatbox-icon.svg') }}" /></button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript for handling search and redirection
+    function handleSearch(event) {
+        if (event.key === "Enter") {
+            // Get the value entered in the search input
+            var searchQuery = document.getElementById('searchInput').value;
+
+            // Perform the redirection to app2.py (modify the URL as needed)
+            window.location.href = '/5501?query=' + encodeURIComponent(searchQuery);
+        }
+    }
+</script>
+
+<script>
+    // Your existing JavaScript code
+    $SCRIPT_ROOT = {{ request.script_root|tojson }};
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>

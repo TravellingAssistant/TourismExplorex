@@ -1,0 +1,707 @@
+{
+    "intents": [
+      {
+        "tag": "greeting",
+        "patterns": [
+          "Hi",
+          "Hey",
+          "Hello",
+          "Is anyone there?",
+          "Good day",
+          "Greetings",
+          "What’s up?",
+          "How are you?"
+        ],
+        "responses": [
+          "Hello! How can I assist you on your travels today?",
+          "Hi there! What do you need help with?",
+          "Welcome! How can I make your travel easier?",
+          "Greetings! What can I help you with?"
+        ]
+      },
+      {
+        "tag": "accommodation",
+        "patterns": [
+          "Find a hotel near me",
+          "Best places to stay in [location]",
+          "Recommend a good hotel",
+          "Where can I find accommodation?",
+          "What are the best hotels in [location]?",
+          "Can you suggest a place to stay?",
+          "Looking for a budget hotel",
+          "Luxury hotels in [location]",
+          "Any hostels around?",
+          "Looking for a place to crash"
+        ],
+        "responses": [
+          "I can help you find the best hotels in [location].",
+          "Here are some great accommodation options: [hotel names].",
+          "What type of accommodation are you looking for in [location]?",
+          "For [location], I recommend checking out [hotel names]."
+        ]
+      },
+      {
+        "tag": "dining_options",
+        "patterns": [
+          "Suggest a restaurant",
+          "Where should I eat in [location]?",
+          "Best restaurants nearby",
+          "What are some good dining options?",
+          "Top-rated restaurants in [location]",
+          "Looking for vegetarian places to eat",
+          "Can you recommend a cafe?",
+          "Best local cuisine in [location]"
+        ],
+        "responses": [
+          "Here are some highly rated restaurants in [location]: [restaurant names].",
+          "You should try [restaurant name]. They have great reviews!",
+          "What type of cuisine are you interested in?",
+          "For dining, I recommend [restaurant name] for its ambiance."
+        ]
+      },
+      {
+        "tag": "places_of_interest",
+        "patterns": [
+          "What to do in [location]?",
+          "Any attractions in [location]?",
+          "Must-see places near me",
+          "Can you suggest some activities?",
+          "What are the top attractions in [location]?",
+          "I need ideas for sightseeing",
+          "Is there a park or museum nearby?",
+          "What can I do for fun in [location]?"
+        ],
+        "responses": [
+          "You should visit [place name]. It's a popular attraction!",
+          "Here are some interesting places to explore in [location]: [place names].",
+          "Are you interested in historical sites, parks, or something else?",
+          "Don’t miss [place name] while you're in [location]."
+        ]
+      },
+      {
+        "tag": "local_info",
+        "patterns": [
+          "What is the weather like in [location]?",
+          "Any travel tips for [location]?",
+          "What should I know before visiting [location]?",
+          "Are there any local customs I should be aware of?",
+          "What’s the best time to visit [location]?",
+          "Can you tell me about the local transportation?",
+          "Is it safe to travel to [location]?",
+          "What language do they speak in [location]?"
+        ],
+        "responses": [
+          "The current weather in [location] is [weather condition].",
+          "Here are some travel tips for [location]: [tips].",
+          "It's good to know that [custom or etiquette] is important here.",
+          "In [location], the best time to visit is during [season]."
+        ]
+      },
+      {
+        "tag": "goodbye",
+        "patterns": [
+          "Bye",
+          "See you later",
+          "Goodbye",
+          "Thanks for your help!",
+          "I have to go now",
+          "Catch you later",
+          "Take care",
+          "Thanks, that's all I needed"
+        ],
+        "responses": [
+          "You're welcome! Have a great day!",
+          "Goodbye! Enjoy your travels!",
+          "See you next time! Safe travels!",
+          "Take care and happy exploring!"
+        ]
+      },
+      {
+
+                "tag": "famous_places_in_vijayawada",
+                "patterns": [
+                    "famous places in Vijayawada?",
+                    "give me top rating places in Vijayawada?",
+                    "give me must-see places in Vijayawada?"
+                ],
+                "responses": [
+                    "Kanaka Durga Temple, Prakasam Barrage, Bhavani Island, Undavalli Caves, Kondapalli Fort"
+                ]
+            },
+            {
+                "tag": "famous_places_in_visakhapatnam",
+                "patterns": [
+                    "famous places in Visakhapatnam?",
+                    "give me top tourist spots in Visakhapatnam?",
+                    "give me famous locations in Vizag?"
+                ],
+                "responses": [
+                    "RK Beach, Kailasagiri, Simhachalam Temple, Submarine Museum, Araku Valley"
+                ]
+            },
+            {
+                "tag": "famous_places_in_tirupati",
+                "patterns": [
+                    "famous places in Tirupati?",
+                    "give me top rating places in Tirupati?",
+                    "give me places to visit in Tirupati?"
+                ],
+                "responses": [
+                    "Tirumala Venkateswara Temple, Sri Kapileswara Swamy Temple, Sri Venkateswara National Park, Chandragiri Fort"
+                ]
+            },
+            {
+                "tag": "famous_places_in_guntur",
+                "patterns": [
+                    "famous places in Guntur?",
+                    "give me top rating places in Guntur?",
+                    "give me tourist places in Guntur?"
+                ],
+                "responses": [
+                    "Amaravati, Uppalapadu Bird Sanctuary, Kondavid Fort, Ethipothala Falls"
+                ]
+            },
+            {
+                "tag": "famous_places_in_nellore",
+                "patterns": [
+                    "famous places in Nellore?",
+                    "give me top rating places in Nellore?",
+                    "give me tourist places in Nellore?"
+                ],
+                "responses": [
+                    "Penchalakona, Sri Ranganathaswamy Temple, Udayagiri Fort, Nellapattu Bird Sanctuary"
+                ]
+            },
+            {
+                "tag": "famous_places_in_kurnool",
+                "patterns": [
+                    "famous places in Kurnool?",
+                    "give me top rating places in Kurnool?",
+                    "give me tourist spots in Kurnool?"
+                ],
+                "responses": [
+                    "Belum Caves, Konda Reddy Fort, Oravakallu Rock Garden, Yaganti Temple"
+                ]
+            },
+            {
+                "tag": "famous_places_in_anantapur",
+                "patterns": [
+                    "famous places in Anantapur?",
+                    "give me top tourist places in Anantapur?",
+                    "give me famous spots in Anantapur?"
+                ],
+                "responses": [
+                    "Lepakshi Temple, Thimmamma Marrimanu, Penukonda Fort, Dharmavaram"
+                ]
+            },
+            {
+                "tag": "famous_places_in_chittoor",
+                "patterns": [
+                    "what are the famous places in Chittoor?",
+                    "give me top rating places in Chittoor?",
+                    "give me tourist spots in Chittoor?"
+                ],
+                "responses": [
+                    "Horsley Hills, Kaundinya Wildlife Sanctuary, Sri Venkateswara Temple, Kalavagunta"
+                ]
+            },
+            {
+                "tag": "famous_places_in_rajahmundry",
+                "patterns": [
+                    "famous places in Rajahmundry?",
+                    "give me top tourist places in Rajahmundry?",
+                    "give me popular spots in Rajahmundry?"
+                ],
+                "responses": [
+                    "Godavari Bridge, Dowleswaram Barrage, ISKCON Temple, Papi Hills"
+                ]
+            },
+            {
+                "tag": "famous_places_in_srikakulam",
+                "patterns": [
+                    "famous places in Srikakulam?",
+                    "give me top tourist places in Srikakulam?",
+                    "give me famous spots in Srikakulam?"
+                ],
+                "responses": [
+                    "Srikurmam, Kalingapatnam Beach, Arasavalli Temple, Baruva"
+                ]
+            },
+            {
+                "tag": "famous_places_in_eluru",
+                "patterns": [
+                    "famous places in Eluru?",
+                    "give me top tourist spots in Eluru?",
+                    "give me places to visit in Eluru?"
+                ],
+                "responses": [
+                    "Kolleru Lake, Eluru Buddha Park, Dwaraka Tirumala, Jalapatham Waterfalls"
+                ]
+            },
+        
+    
+      {
+        "tag": "emergency",
+        "patterns": [
+          "Help! I need assistance!",
+          "What should I do in an emergency?",
+          "Who do I call for help?",
+          "Is there a nearby hospital?",
+          "I lost my wallet, what should I do?",
+          "Can you help me find the police station?",
+          "I need a doctor!",
+          "What to do if I feel unsafe?"
+        ],
+        "responses": [
+          "In case of emergency, dial [emergency number] for immediate assistance.",
+          "You can find the nearest hospital at [hospital name].",
+          "Stay calm! What kind of assistance do you need?",
+          "Contact local authorities at [emergency contact] if you feel unsafe."
+        ]
+      },
+      {
+        "tag": "feedback",
+        "patterns": [
+          "Can I leave feedback?",
+          "How do I share my experience?",
+          "Where can I provide suggestions?",
+          "I want to report an issue.",
+          "How can I improve the app?",
+          "Do you take user suggestions?",
+          "Can I rate my experience?",
+          "How can I help you improve?"
+        ],
+        "responses": [
+          "We appreciate your feedback! Please share your thoughts.",
+          "You can leave feedback via [feedback link or method].",
+          "Your suggestions are important to us! Please tell us more.",
+          "We’d love to hear how we can improve!"
+        ]
+      },
+      {
+        "tag": "payments",
+        "patterns": [
+          "Do you take credit cards?",
+          "Do you accept Mastercard?",
+          "Can I pay with Paypal?",
+          "Are you cash only?"
+        ],
+        "responses": [
+          "We accept VISA, Mastercard and Paypal",
+          "We accept most major credit cards, and Paypal"
+        ]
+      },
+      
+        {
+            "tag": "famous_place_in_guntur",
+            "patterns": [
+                "famous place in Guntur?",
+                "give me top rating place in Guntur?",
+                "give me another place in Guntur?"
+            ],
+            "responses": [
+                "Undavalli Cave Temple",
+                "Kondaveedu Fort",
+                "Sri Durga Malleswara Swamy Varla Devasthanam",
+                "Amaravati Stupam",
+                "Sri Amareswara Swamy Vari Devasthanam",
+                "Uppalapadu Bird Sanctuary"
+            ]
+        },
+        {
+            "tag": "famous_place_in_vijayawada",
+            "patterns": [
+                "famous place in Vijayawada?",
+                "give me top rating place in Vijayawada?",
+                "give me another place in Vijayawada?"
+            ],
+            "responses": [
+                "Kanaka Durga Temple",
+                "Prakasam Barrage",
+                "Bhavani Island",
+                "Undavalli Caves",
+                "Mangalagiri Temple",
+                "Gandhi Hill"
+            ]
+        },
+        {
+            "tag": "famous_place_in_visakhapatnam",
+            "patterns": [
+                "famous place in Visakhapatnam?",
+                "give me top rating place in Visakhapatnam?",
+                "give me another place in Visakhapatnam?"
+            ],
+            "responses": [
+                "RK Beach",
+                "Kailasagiri",
+                "INS Kursura Submarine Museum",
+                "Araku Valley",
+                "Borra Caves",
+                "Simhachalam Temple"
+            ]
+        },
+        {
+            "tag": "famous_place_in_tirupati",
+            "patterns": [
+                "famous place in Tirupati?",
+                "give me top rating place in Tirupati?",
+                "give me another place in Tirupati?"
+            ],
+            "responses": [
+                "Tirumala Venkateswara Temple",
+                "Sri Kapileswara Swamy Temple",
+                "Chandragiri Fort",
+                "Sri Venkateswara National Park",
+                "Silathoranam",
+                "Sri Govindaraja Swamy Temple"
+            ]
+        },
+        {
+            "tag": "famous_place_in_kakinada",
+            "patterns": [
+                "famous place in Kakinada?",
+                "give me top rating place in Kakinada?",
+                "give me another place in Kakinada?"
+            ],
+            "responses": [
+                "Coringa Wildlife Sanctuary",
+                "Hope Island",
+                "Sri Bhavannarayana Swamy Temple",
+                "Draksharamam Temple",
+                "Adurru Excavation Site",
+                "Yanam"
+            ]
+        },
+        {
+            "tag": "famous_place_in_rajahmundry",
+            "patterns": [
+                "famous place in Rajahmundry?",
+                "give me top rating place in Rajahmundry?",
+                "give me another place in Rajahmundry?"
+            ],
+            "responses": [
+                "Godavari Bridge",
+                "Papi Hills",
+                "Kadiyapulanka Nurseries",
+                "Dowleswaram Barrage",
+                "ISKCON Rajahmundry",
+                "Kotilingeswara Temple"
+            ]
+        },
+        {
+            "tag": "famous_place_in_nellore",
+            "patterns": [
+                "famous place in Nellore?",
+                "give me top rating place in Nellore?",
+                "give me another place in Nellore?"
+            ],
+            "responses": [
+                "Sri Ranganathaswamy Temple",
+                "Pulicat Lake",
+                "Venkatagiri Fort",
+                "Nellapattu Bird Sanctuary",
+                "Penchalakona Temple",
+                "Mypadu Beach"
+            ]
+        },
+        {
+            "tag": "famous_place_in_anantapur",
+            "patterns": [
+                "famous places in Anantapur?",
+                "give me top rating place in Anantapur?",
+                "give me another place in Anantapur?"
+            ],
+            "responses": [
+                "Lepakshi Temple",
+                "Penukonda Fort",
+                "Thimmamma Marrimanu",
+                "Gooty Fort",
+                "Sri Kadiri Lakshmi Narasimha Swamy Temple",
+                "Ravadurg Gooty Fort"
+            ]
+        },
+        {
+            "tag": "famous_places_in_kadapa",
+            "patterns": [
+                "famous places in Kadapa?",
+                "give me top rating places in Kadapa?",
+                "give me another places in Kadapa?"
+            ],
+            "responses": [
+                "Gandikota Fort Ameen Peer Dargah Pushpagiri Temples Brahmamgari Matam Temple Vontimitta Kodandarama Temple Sidhout Fort"
+            ]
+        },
+        {
+            "tag": "famous_place_in_ongole",
+            "patterns": [
+                "famous place in Ongole?",
+                "give me top rating place in Ongole?",
+                "give me another place in Ongole?"
+            ],
+            "responses": [
+                "Kashi Visweswara Swamy Temple",
+                "Chennakesava Swamy Temple",
+                "Tangutur Beach",
+                "Vodarevu Beach",
+                "Chandavaram Buddhist Site",
+                "Sri Shirdi Sai Baba Mandir"
+            ]
+        },
+        {
+            "tag": "famous_place_in_chittoor",
+            "patterns": [
+                "famous place in Chittoor?",
+                "give me top rating place in Chittoor?",
+                "give me another place in Chittoor?"
+            ],
+            "responses": [
+                "Horsley Hills",
+                "Sri Kalyana Venkateswara Swamy Temple",
+                "Nagari Hills",
+                "Gurramkonda Fort",
+                "Mogili Temple",
+                "Kalavagunta"
+            ]
+        },
+        {
+            "tag": "famous_place_in_eluru",
+            "patterns": [
+                "famous place in Eluru?",
+                "give me top rating place in Eluru?",
+                "give me another place in Eluru?"
+            ],
+            "responses": [
+                "Kolleru Lake",
+                "Dwaraka Tirumala Temple",
+                "Sri Adikesava Emberumaanar Swamy Temple",
+                "Tangellamudi Park",
+                "Guntupalli Buddhist Caves",
+                "Pedavegi Fort"
+            ]
+        },
+    
+    
+      {
+        "tag": "guntur_restaurant",
+        "patterns": [
+          "famous restaurant in guntur?",
+          "top rating restaurant in guntur?",
+          "best food restaurant in guntur?",
+          "give me another restaurant in guntur"
+  
+        ],
+        "responses": [
+          "Hotel Babu Biryani Point: A restaurant in Railpet and Kothapet that serves biryani, tandoor, and Chinese food",
+          "Hoskote Four Am Biryani: A popular place for biryani and kebabs near Lakshmipuram",
+          "Swagruha Foods: One of the oldest restaurants in Guntur, serving homemade sweets",
+          "Sri Udaya Shankar Restaurant: A vegetarian restaurant with a new look",
+          "Flameingoes Restaurant: A restaurant that serves tasty food",
+          "Mandi Arabic Restaurant: A luxury dining restaurant",
+          "Viceroy Biriyani Point: A luxury dining restaurant that serves biryani, Chinese, North Indian, seafood, and Andhra food",
+          "Viceroy Biriyani Point: A luxury dining restaurant that serves biryani, Chinese, North Indian, seafood, and Andhra food",
+          "Ak Special Hyderabadi Biryani House: A restaurant that serves biryani"
+  
+  
+  
+        ]
+      },
+     
+      {
+          "tag": "vijayawada_restaurant",
+          "patterns": [
+              "famous restaurant in Vijayawada?",
+              "top rating restaurant in Vijayawada?",
+              "best food restaurant in Vijayawada?",
+              "give me another restaurant in Vijayawada"
+          ],
+          "responses": [
+              "Sweet Magic: Famous for sweets and Andhra cuisine",
+              "Crossroads Restaurant: A fine dining restaurant offering Indian, Chinese, and Continental dishes",
+              "Babai Hotel: A classic restaurant known for traditional Andhra breakfast",
+              "Lotus - The Food City: A multi-cuisine restaurant offering good ambiance",
+              "Minerva Coffee Shop: Known for South Indian breakfast and snacks"
+          ]
+      },
+      {
+          "tag": "visakhapatnam_restaurant",
+          "patterns": [
+              "famous restaurant in Visakhapatnam?",
+              "top rating restaurant in Visakhapatnam?",
+              "best food restaurant in Visakhapatnam?",
+              "give me another restaurant in Visakhapatnam"
+          ],
+          "responses": [
+              "Dharani: A vegetarian restaurant in Daspalla Hotel",
+              "Flying Spaghetti Monster: Popular for Italian food",
+              "Sri Sairam Parlour: Famous for South Indian meals and snacks",
+              "Zaffran Exotica: A rooftop restaurant offering North Indian and Mughlai cuisine",
+              "Dakshin Restaurant: Known for authentic South Indian flavors"
+          ]
+      },
+      {
+          "tag": "tirupati_restaurant",
+          "patterns": [
+              "famous restaurant in Tirupati?",
+              "top rating restaurant in Tirupati?",
+              "best food restaurant in Tirupati?",
+              "give me another restaurant in Tirupati"
+          ],
+          "responses": [
+              "Andhra Spice: Known for its Andhra-style meals and biryani",
+              "Bhimas Paradise: A popular vegetarian restaurant",
+              "Hyderabad House: Famous for Hyderabadi biryani",
+              "Saarangi Fine Dine: A multi-cuisine restaurant offering Indian and Continental dishes",
+              "Zodiac: A luxury dining option with a variety of cuisine"
+          ]
+      },
+      {
+          "tag": "kakinada_restaurant",
+          "patterns": [
+              "famous restaurant in Kakinada?",
+              "top rating restaurant in Kakinada?",
+              "best food restaurant in Kakinada?",
+              "give me another restaurant in Kakinada"
+          ],
+          "responses": [
+              "Subbayya Gari Hotel: A renowned vegetarian restaurant famous for Andhra meals",
+              "Udupi Ruchulu: Popular for South Indian breakfast and meals",
+              "Bombay Kulfi: Famous for its unique kulfi and desserts",
+              "Royal Dine: A multi-cuisine restaurant serving North Indian and Chinese",
+              "Spicy Garden Restaurant: Known for its non-vegetarian dishes"
+          ]
+      },
+      {
+          "tag": "rajahmundry_restaurant",
+          "patterns": [
+              "famous restaurant in Rajahmundry?",
+              "top rating restaurant in Rajahmundry?",
+              "best food restaurant in Rajahmundry?",
+              "give me another restaurant in Rajahmundry"
+          ],
+          "responses": [
+              "Udupi Akshaya Restaurant: Popular for vegetarian South Indian food",
+              "Subbayya Hotel: Known for traditional Andhra vegetarian meals",
+              "Madhuvan Restaurant: A family restaurant with multi-cuisine options",
+              "Swaad Restaurant: Famous for its North Indian and Chinese dishes",
+              "Ramalayam Sweet House: Known for its sweets and snacks"
+          ]
+      },
+      {
+          "tag": "nellore_restaurant",
+          "patterns": [
+              "famous restaurant in Nellore?",
+              "top rating restaurants in Nellore?",
+              "best food restaurants in Nellore?",
+              "give me another restaurant in Nellore"
+          ],
+          "responses": [
+              "Murali Krishna Veg Restaurant: Known for vegetarian meals and tiffins",
+              "Mayuri Multicuisine Restaurant: Famous for biryani and Andhra food",
+              "Sree Vaishnavi Family Restaurant: Known for family dining and Indian food",
+              "Nellore Kitchens: A popular spot for spicy Nellore biryani",
+              "Komala Vilas: A vegetarian restaurant popular for tiffins and meals"
+          ]
+      },
+      {
+          "tag": "anantapur_restaurant",
+          "patterns": [
+              "famous restaurant in Anantapur?",
+              "top rating restaurants in Anantapur?",
+              "best food restaurants in Anantapur?",
+              "give me another restaurant in Anantapur"
+          ],
+          "responses": [
+              "Haveli Family Restaurant: Popular for family dining and multi-cuisine options",
+              "Moti Mahal Delux: A fine dining restaurant serving North Indian dishes",
+              "Saffron Spices Restaurant: Known for its biryani and non-veg dishes",
+              "Sri Ramakrishna Hotel: Famous for vegetarian South Indian meals",
+              "Food Pyramid: A contemporary restaurant offering Indian and Chinese cuisine"
+          ]
+      },
+      {
+          "tag": "kadapa_restaurant",
+          "patterns": [
+              "famous restaurant in Kadapa?",
+              "top rating restaurants in Kadapa?",
+              "best food restaurants in Kadapa?",
+              "give me another restaurant in Kadapa"
+          ],
+          "responses": [
+              "Blue Moon: A popular restaurant for non-vegetarian dishes",
+              "Amogha Restaurant: Known for vegetarian food and meals",
+              "Hotel Shalimar: Famous for biryani and Indian dishes",
+              "Spice Kitchen: A multi-cuisine restaurant offering a variety of options",
+              "Haritha Restaurant: Known for South Indian dishes and meals"
+          ]
+      },
+      {
+          "tag": "ongole_restaurant",
+          "patterns": [
+              "famous restaurant in Ongole?",
+              "top rating restaurants in Ongole?",
+              "best food restaurants in Ongole?",
+              "give me another restaurant in Ongole"
+          ],
+          "responses": [
+              "Ravi Hotel: Famous for its spicy Andhra meals",
+              "Spicy Paradise: Popular for multi-cuisine dining",
+              "Hotel Sarovar: Known for North Indian, South Indian, and Chinese dishes",
+              "Sreelatha Family Restaurant: Known for family-friendly dining options",
+              "Mohana Krishna Hotel: Famous for South Indian dishes and tiffins"
+          ]
+      },
+      {
+          "tag": "chittoor_restaurant",
+          "patterns": [
+              "famous restaurant in Chittoor?",
+              "top rating restaurants in Chittoor?",
+              "best food restaurants in Chittoor?",
+              "give me another restaurant in Chittoor"
+          ],
+          "responses": [
+              "Ruchulu Family Restaurant: Famous for South Indian meals",
+              "Sri Sai Vihar Restaurant: Known for North and South Indian cuisine",
+              "KFC Chittoor: A popular fast food chain",
+              "Hotel Sri Raghavendra: A vegetarian restaurant known for tiffins",
+              "Anand Bhavan: A family-friendly restaurant offering Indian cuisine"
+          ]
+      },
+      {
+          "tag": "eluru_restaurant",
+          "patterns": [
+              "famous restaurant in Eluru?",
+              "top rating restaurants in Eluru?",
+              "best food restaurants in Eluru?",
+              "give me another restaurant in Eluru"
+          ],
+          "responses": [
+              "Sri Balaji Family Restaurant: Known for Andhra meals",
+              "Sasi Restaurant: Popular for its biryani and vegetarian meals",
+              "Apple Family Restaurant: A well-known spot for non-vegetarian dishes",
+              "Pavani Restaurant: Famous for its tasty tiffins and snacks",
+              "Siddhartha Restaurant: A multi-cuisine option offering Chinese and Indian food"
+          ]
+      },
+  
+      
+      {
+        "tag": "funny",
+        "patterns": [
+          "Tell me a joke!",
+          "Do you know a funny story?",
+          "Make me laugh!",
+          "Give me a travel-related joke.",
+          "I need a good laugh.",
+          "What's a funny travel experience?",
+          "Share something humorous!",
+          "Got any travel puns?"
+        ],
+        "responses": [
+          "Why don't scientists trust atoms? Because they make up everything!",
+          "I told my suitcase there would be no vacation this year. Now I'm dealing with emotional baggage.",
+          "What do you call a bear with no teeth? A gummy bear!",
+          "Why did the traveler bring a ladder? To reach new heights!"
+        ]
+      }
+    ]
+  }

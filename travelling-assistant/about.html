@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Tourism Explorex</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background: url('background-image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        header { 
+            background: #000; 
+            color: #fff; 
+            padding: 10px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+        }
+
+        header nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        header nav a { 
+            color: #fff; 
+            margin: 0 15px; 
+            text-decoration: none; 
+            font-weight: bold; 
+        }
+
+        header nav a:hover {
+            color: #ff5722;
+        }
+
+        .container {
+            flex: 1; /* Allows content to grow and push footer down */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px 20px; /* Space for fixed header and footer */
+            box-sizing: border-box;
+        }
+        .logo { 
+            font-size: 1.8em; 
+            font-weight: bold; 
+        }
+
+        .content {
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8); /* Slightly transparent white background */
+        }
+
+        .content h2 {
+            font-size: 2.2em;
+            margin-top: 0;
+            color: #333;
+        }
+
+        .content p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 20px 0;
+            color: #555;
+        }
+
+        footer {
+            background: #000; /* Black background */
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+            box-shadow: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Tourism Explorex</div>
+        <nav>
+            <a href="main.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="blog.html">Blog</a>
+        </nav>
+    </header>
+    
+
+<div class="container">
+    <div class="content" id="about">
+        <h2>About Us</h2>
+        <p>Welcome to Tourism Explorex! Our mission is to provide travelers with exceptional information and resources to enhance their journeys. Whether you're seeking the best attractions, dining experiences, or accommodations, we're here to guide you every step of the way. Explore new destinations and make the most of your travels with us.</p>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Tourism Explorex. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

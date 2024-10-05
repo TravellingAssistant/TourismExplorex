@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Accommodations - Tourism Explorex</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background: #fafafa; 
+            color: #333; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
+        }
+        header { 
+            background: #000; 
+            color: #fff; 
+            padding: 10px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+        }
+        .logo { 
+            font-size: 1.8em; 
+            font-weight: bold; 
+        }
+        nav a { 
+            color: #fff; 
+            margin: 0 15px; 
+            text-decoration: none; 
+            font-weight: bold; 
+        }
+        nav a:hover { 
+            color: #ff5722;
+        }
+        .container { 
+            padding: 20px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            flex: 1; 
+        }
+        .hotel-container { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 20px; 
+            justify-content: space-between;
+        }
+        .hotel { 
+            flex: 1 1 calc(33.333% - 20px); 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+            padding: 10px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+            background: #fff;
+            box-sizing: border-box;
+        }
+        .hotel img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            border-radius: 5px; 
+            margin-bottom: 10px; 
+        }
+        .hotel h3 { 
+            margin: 10px 0; 
+            text-align: center; 
+        }
+        .hotel p { 
+            margin: 5px 0; 
+            text-align: center; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hotel .fa-map-marker-alt { 
+            margin-right: 5px; 
+        }
+        footer { 
+            background: #000; 
+            color: #fff; 
+            text-align: center; 
+            padding: 10px 20px; 
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Tourism Explorex</div>
+    <nav>
+        <a href="main.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="blog.html">Blog</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h1>Hotel Accommodations</h1>
+    <div class="hotel-container" id="hotels"></div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Tourism Explorex. All rights reserved.</p>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const city = urlParams.get('city');
+        if (city) {
+            fetch(`hotel_accomodations.php?city=${encodeURIComponent(city)}`)
+                .then(response => response.json())
+                .then(data => {
+                    const hotelsContainer = document.getElementById('hotels');
+                    if (data.length > 0) {
+                        data.forEach(hotel => {
+                            const hotelDiv = document.createElement('div');
+                            hotelDiv.className = 'hotel';
+                            hotelDiv.innerHTML = `
+                                <img src="${hotel.image}" alt="${hotel.name}">
+                                <h3>${hotel.name}</h3>
+                                <p><i class="fas fa-star"></i> ${hotel.rating}</p>
+                                <p><i class="fas fa-map-marker-alt"></i> ${hotel.address}</p>
+                            `;
+                            hotelsContainer.appendChild(hotelDiv);
+                        });
+                    } else {
+                        hotelsContainer.innerHTML = '<p>No hotels found for this location.</p>';
+                    }
+                })
+                .catch(error => console.error('Error fetching hotel data:', error));
+        } else {
+            document.getElementById('hotels').innerHTML = '<p>No city selected.</p>';
+        }
+    });
+</script>
+
+</body>
+</html>

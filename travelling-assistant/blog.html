@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Tourism Explorex</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background: url('background-image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        header { 
+            background: #000; 
+            color: #fff; 
+            padding: 10px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+        }
+        .content {
+            padding: 20px;
+            flex: 1;
+            background: rgba(255, 255, 255, 0.8);
+            margin: 20px;
+            border-radius: 10px;
+        }
+        nav a { 
+            color: #fff; 
+            margin: 0 15px; 
+            text-decoration: none; 
+            font-weight: bold; 
+        }
+        nav a:hover { 
+            color: #ff5722;
+        }
+        .review {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .logo { 
+            font-size: 1.8em; 
+            font-weight: bold; 
+        }
+        .rating {
+            color: #ff6600;
+        }
+        .review-form {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .review-form input, .review-form textarea, .review-form button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .review-form button {
+            background: #28a745; /* Green color */
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .review-form button:hover {
+            background: #218838; /* Darker green on hover */
+        }
+        .stars {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .star {
+            font-size: 2em;
+            color: #ddd;
+            cursor: pointer;
+        }
+        .star:hover, .star.selected {
+            color: #ff6600;
+        }
+        footer {
+            background: #000; /* Black background */
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+            box-shadow: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const stars = document.querySelectorAll('.star');
+            let selectedRating = 0;
+
+            stars.forEach((star, index) => {
+                star.addEventListener('click', () => {
+                    selectedRating = index + 1;
+                    updateStarRating(selectedRating);
+                });
+            });
+
+            document.getElementById('review-form').addEventListener('submit', (event) => {
+                event.preventDefault();
+                addReview(selectedRating);
+            });
+
+            function updateStarRating(rating) {
+                stars.forEach((star, index) => {
+                    if (index < rating) {
+                        star.classList.add('selected');
+                    } else {
+                        star.classList.remove('selected');
+                    }
+                });
+            }
+
+            function addReview(rating) {
+                const name = document.getElementById('name').value;
+                const reviewText = document.getElementById('review').value;
+
+                if (name && reviewText && rating) {
+                    const reviewContainer = document.createElement('div');
+                    reviewContainer.className = 'review';
+
+                    const reviewTitle = document.createElement('h3');
+                    reviewTitle.textContent = name;
+                    reviewContainer.appendChild(reviewTitle);
+
+                    const reviewContent = document.createElement('p');
+                    reviewContent.textContent = reviewText;
+                    reviewContainer.appendChild(reviewContent);
+
+                    const reviewRating = document.createElement('p');
+                    reviewRating.className = 'rating';
+                    reviewRating.textContent = `Rating: ${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}`;
+                    reviewContainer.appendChild(reviewRating);
+
+                    document.querySelector('.content').appendChild(reviewContainer);
+
+                    document.getElementById('review-form').reset();
+                    updateStarRating(0);
+                    selectedRating = 0;
+                } else {
+                    alert('Please fill in all fields and select a rating.');
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Tourism Explorex-Blog</div>
+        <nav>
+            <a href="main.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="blog.html">Blog</a>
+        </nav>
+    </header>
+
+<div class="content">
+    <div class="review">
+        <h3>John Doe</h3>
+        <p>My experience with Tourism Explorex was phenomenal. The website is user-friendly and provided all the information I needed for my trip.</p>
+        <p class="rating">Rating: ★★★★★</p>
+    </div>
+    <div class="review">
+        <h3>Jane Smith</h3>
+        <p>Great service and a fantastic range of attractions listed. I found exactly what I was looking for easily.</p>
+        <p class="rating">Rating: ★★★★☆</p>
+    </div>
+
+    <div class="review-form">
+        <h3>Submit Your Review</h3>
+        <form id="review-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <textarea id="review" placeholder="Your Review" rows="4" required></textarea>
+            <div class="stars">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Tourism Explorex. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

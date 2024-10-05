@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+    
+      body {
+          margin: 0;
+          padding: 0;
+          font-family: Arial, sans-serif;
+          background-image: url('taa.jpg'); /* Replace 'your-image-url.jpg' with the actual path to your image */
+          background-size: cover;
+          background-position: center;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+  
+      .login-container {
+          background: rgba(255, 255, 255, 0.8); /* Optional: Add a semi-transparent white background to make the form stand out */
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+  
+      /* Add additional styling for your login form elements here */
+  </style>
+    <title>Login | By CodeArtistic</title>
+    <link rel="stylesheet" href="style1.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
+    <script>
+      function redirectToLocation() {
+        window.location.href = "http://127.0.0.1:5000";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="login-box">
+      <h1>Login</h1>
+      <form onsubmit="redirectToLocation(); return false;">
+        <label for="email">Email</label>
+        <input type="email" placeholder="" id="email">
+
+        <label for="password">Password</label>
+        <input type="password" placeholder="" id="password">
+        
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <p class="para-2">
+      Not have an account? <a href="index.html">Signup here</a>
+    </p>
+  </body>
+</html>

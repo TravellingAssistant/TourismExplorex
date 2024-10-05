@@ -1,0 +1,226 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Assistant Bookmarks</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            color: #333;
+        }
+
+        /* Overlay to darken the background for better readability */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+            z-index: 1;
+        }
+
+        /* Container */
+        .container {
+            position: relative; /* To position above the overlay */
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+            margin: 50px auto;
+            z-index: 2;
+        }
+
+        /* Heading */
+        h1 {
+            font-family: 'Lora', serif;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            color: #2c3e50;
+        }
+
+        /* Form Styles */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #5cdb95;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45b583;
+        }
+
+        /* Bookmarks Section */
+        h2 {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 1.8em;
+            color: #2c3e50;
+        }
+
+        .bookmark-list {
+            margin-top: 20px;
+        }
+
+        .bookmark-item {
+            background-color: #f7f9fc;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ccc;
+            transition: background-color 0.3s ease;
+        }
+
+        .bookmark-item:hover {
+            background-color: #eaf2f8;
+        }
+
+        .remove-btn {
+            background-color: #ff6b6b;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background-color: #e74c3c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Travel Bookmarks</h1>
+
+        <label for="place">Place Name:</label>
+        <input type="text" id="place" placeholder="Enter a place name" required>
+
+        <label for="details">Details:</label>
+        <input type="text" id="details" placeholder="Enter details" required>
+
+        <button onclick="addBookmark()">Add Bookmark</button>
+
+        <h2>Your Bookmarks</h2>
+        <div id="bookmarkList" class="bookmark-list"></div>
+    </div>
+
+    <script>
+        // Function to display bookmarks
+        function displayBookmarks() {
+            const bookmarkList = document.getElementById('bookmarkList');
+            bookmarkList.innerHTML = '';  // Clear current bookmarks
+            const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+
+            bookmarks.forEach((bookmark, index) => {
+                const div = document.createElement('div');
+                div.classList.add('bookmark-item');
+
+                const info = document.createElement('div');
+                info.innerHTML = `<strong>${bookmark.place}</strong>: ${bookmark.details}`;
+
+                const removeBtn = document.createElement('button');
+                removeBtn.classList.add('remove-btn');
+                removeBtn.textContent = 'Remove';
+                removeBtn.onclick = () => removeBookmark(index);
+
+                div.appendChild(info);
+                div.appendChild(removeBtn);
+                bookmarkList.appendChild(div);
+            });
+        }
+
+        // Function to add a new bookmark
+        function addBookmark() {
+            const placeInput = document.getElementById('place');
+            const detailsInput = document.getElementById('details');
+            const place = placeInput.value.trim();
+            const details = detailsInput.value.trim();
+
+            if (place && details) {
+                const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+                bookmarks.push({ place, details });
+                localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+                placeInput.value = '';
+                detailsInput.value = '';
+                displayBookmarks();
+            } else {
+                alert('Please enter both place name and details.');
+            }
+        }
+
+        // Function to remove a bookmark
+        function removeBookmark(index) {
+            const bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+            bookmarks.splice(index, 1);
+            localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+            displayBookmarks();
+        }
+
+        // Display bookmarks when the page loads
+        window.onload = displayBookmarks;
+    </script>
+
+</body>
+</html>

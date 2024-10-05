@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Attractions - Tourism Explorex</title>
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+         @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+        /* Add your CSS styles here */
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background: #fafafa; 
+            color: #333; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
+        }
+        header { 
+            background: #000; 
+            color: #fff; 
+            padding: 10px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+        }
+
+        footer { 
+            background: #000; 
+            color: #fff; 
+            text-align: center; 
+            padding: 10px 20px; 
+            margin-top: auto;
+        }
+        .attractions { display: flex; flex-wrap: wrap; justify-content: space-around; margin: 20px; }
+        .attraction { width: 300px; margin: 10px; padding: 20px; background: #fff; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .attraction img { width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            border-radius: 5px; 
+            margin-bottom: 10px;  }
+        .logo { 
+            font-size: 1.8em; 
+            font-weight: bold; 
+        }
+        nav a { 
+            color: #fff; 
+            margin: 0 15px; 
+            text-decoration: none; 
+            font-weight: bold; 
+        }
+        nav a:hover { 
+            color: #ff5722;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Tourism Explorex-Places to visit</div>
+        <nav>
+            <a href="main.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="blog.html">Blog</a>
+        </nav>
+    </header>
+    
+
+<div class="attractions" id="attractions"></div>
+
+<footer>
+    <p>&copy; 2024 Tourism Explorex. All rights reserved.</p>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const city = urlParams.get('city');
+
+        fetch(`fetch_places.php?city=${city}`)
+            .then(response => response.json())
+            .then(data => {
+                const attractionsDiv = document.getElementById('attractions');
+                data.forEach(attraction => {
+                    const attractionDiv = document.createElement('div');
+                    attractionDiv.className = 'attraction';
+                    attractionDiv.innerHTML = `
+                        <img src="${attraction.image}" alt="${attraction.name}">
+                        <h3>${attraction.name}</h3>
+                    `;
+                    attractionsDiv.appendChild(attractionDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching attractions:', error));
+    });
+</script>
+
+</body>
+</html>

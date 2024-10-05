@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorex Travel</title>
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+         @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* Container Styles */
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center content horizontally and vertically */
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        /* Background Styles */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('img2.jpg.jpg') center/cover no-repeat;
+            filter: blur(5px);
+            z-index: -1;
+            /* Apply zoom effect animation only */
+            animation: zoom 5s infinite alternate;
+        }
+
+        /* Zoom Effect Animation */
+        @keyframes zoom {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Overlay to improve text visibility */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        /* Content Styles */
+        .text {
+            position: relative;
+            z-index: 1;
+            max-width: 500px; /* Limit the width of the text block */
+            text-align: center; /* Center align text */
+        }
+        .text h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 1.5px;
+            text-transform: uppercase; /* Uppercase text */
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            font-family: 'Montserrat', sans-serif; /* Helvetica font */
+            animation: fadeIn 2s ease-out;
+        }
+        .text p {
+            font-size: 1rem; /* Slightly smaller font size */
+            font-weight: 400; /* Regular font weight */
+            margin: 20px 0;
+            line-height: 1.5;
+            font-family: 'Montserrat', sans-serif; /* Monospace font */
+            animation: fadeIn 2s ease-out 0.5s forwards;
+        }
+        .explore-button {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1rem;
+            color: #007bff;
+            background: rgba(0, 0, 0, 0.2); /* Transparent background */
+            border: 2px solid #007bff; /* Border to define the button */
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-transform: uppercase; /* Uppercase text */
+            margin-top: 20px; /* Space above the button */
+            text-align: center; /* Center text within the button */
+            display: block; /* Ensure button is on a new line */
+        }
+        .explore-button:hover {
+            background: #007bff; /* Button background on hover */
+            color: #fff; /* Text color on hover */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="background"></div>
+        <div class="overlay"></div>
+        <div class="text">
+            <h1>Discover Your Next Adventure</h1>
+            <p>Explore breathtaking destinations and create unforgettable memories with Explorex. Your journey starts here.</p>
+            <a href="testt.html" class="explore-button">Explore Now</a>
+        </div>
+    </div>
+</body>
+</html>
