@@ -1,5 +1,7 @@
 {pkgs}: {
   deps = [
+    pkgs.nettools
+    pkgs.uwsgi
     pkgs.parallel-full
     pkgs.percona-server
     pkgs.cacert

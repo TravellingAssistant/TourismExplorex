@@ -253,5 +253,5 @@ def protected_area():
 
 
 if __name__ == "__main__":
-    create_tables()  # Create the tables when the application starts
-    app.run(debug=True)  # Local development server (HTTP allowed)
+    port = int(os.environ.get("PORT", 8080))  # Default to 8080 if PORT is not set
+    app.run(host='0.0.0.0', port=port)
