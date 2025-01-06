@@ -1,0 +1,8 @@
+{
+  "version": "3.11",
+  "deploy": {
+    "pipfile": false,
+    "requirements": true,
+    "command": "gunicorn wsgi:app --bind 0.0.0.0:$PORT --workers=3"
+  }
+}
