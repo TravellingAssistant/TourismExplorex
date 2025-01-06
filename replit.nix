@@ -1,5 +1,6 @@
 {pkgs}: {
   deps = [
+    pkgs.parallel-full
     pkgs.percona-server
     pkgs.cacert
     pkgs.zlib
