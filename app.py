@@ -18,9 +18,10 @@ app = Flask("Google Login App")
 app.secret_key = "vijay"
 
 # MySQL connection details
-MYSQL_HOST = "localhost"
-MYSQL_USER = "root"  # replace with your MySQL username
-MYSQL_PASSWORD = "techventurehub"  # replace with your MySQL password
+MYSQL_HOST = "brow9lqutiwrruahzy6j-mysql.services.clever-cloud.com"
+MYSQL_PORT =  "3306"
+MYSQL_USER = "udefe2bkflhfhjl7"  # replace with your MySQL username
+MYSQL_PASSWORD = "gl9H6qwdjVQl3SbQqqmc"  # replace with your MySQL password
 MYSQL_DB = "tourism"  # replace with your MySQL database name
 
 # Google OAuth details
@@ -43,7 +44,8 @@ def get_db_connection():
         host=MYSQL_HOST,
         user=MYSQL_USER,
         password=MYSQL_PASSWORD,
-        database=MYSQL_DB
+        database=MYSQL_DB,
+         port=MYSQL_PORT
     )
     return connection
 
