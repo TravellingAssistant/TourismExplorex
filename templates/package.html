@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Your Itinerary - Cheyyar</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1e2a3d;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .content {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-bottom: 50px;
+        }
+
+        .content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #1e2a3d;
+        }
+
+        .content p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        /* Hotel Button */
+        .hotel-button {
+            display: inline-block;
+            padding: 15px 25px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .hotel-button:hover {
+            background-color: #2980b9;
+        }
+
+        .itinerary-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .itinerary-details .section {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .itinerary-details .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .itinerary-details .section h3 {
+            font-size: 1.7rem;
+            color: #1e2a3d;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .itinerary-details .section img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .itinerary-details .section img:hover {
+            transform: scale(1.05);
+        }
+
+        .itinerary-details .section .node-info {
+            font-size: 0.95rem;
+            color: #666;
+            margin-top: 15px;
+        }
+
+        .itinerary-details .section .node-info p {
+            margin-bottom: 8px;
+        }
+
+        .itinerary-details .section .tags {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .itinerary-details .section .tags span {
+            background-color: #e0f3f7;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: #1e2a3d;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .itinerary-details .section .tags span:hover {
+            background-color: #1e2a3d;
+            color: white;
+        }
+
+        .recommendation-image {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .recommendation-image img {
+            width: 100%;
+            max-width: 750px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .recommendation-image img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .itinerary-details {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            .content h2 {
+                font-size: 2rem;
+            }
+
+            .itinerary-details .section {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Explore Your Itinerary - Cheyyar</h1>
+    </header>
+
+    <div class="container">
+        <!-- Button to fetch hotel data -->
+        <button class="hotel-button" id="hotelButton">Fetch Hotels</button>
+
+        <div id="hotel-list"></div> <!-- Placeholder for hotel data -->
+
+        <div id="itinerary" class="content">
+            <!-- The itinerary details will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // Dynamic data fetching from API
+        function fetchData(place) {
+            const apiUrl = `https://jokerscript.xyz/api/travel/famus_place.php?place=${place}`;
+            
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch data");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.statusCode === 200) {
+                        const itinerary = data.body.itinerary;
+                        const destinationName = itinerary.destination_name;
+
+                        let itineraryHtml = `
+                            <h2>${destinationName} - Itinerary</h2>
+                        `;
+
+                        itinerary.subregions[0].daywise_details.forEach(day => {
+                            itineraryHtml += `
+                                <h3>${day.day_of_week}, ${day.date}</h3>
+                                <div class="itinerary-details">
+                            `;
+
+                            day.itinerary_for_day.forEach(attraction => {
+                                itineraryHtml += `
+                                    <div class="section">
+                                        <h3>${attraction.node_name}</h3>
+                                        <img src="${attraction.primary_image_url}" alt="${attraction.node_name}">
+                                        <div class="node-info">
+                                            <p><strong>Arrival Time:</strong> ${attraction.node_arrival_time}</p>
+                                            <p><strong>Departure Time:</strong> ${attraction.node_departure_time}</p>
+                                            <p><strong>Average Rating:</strong> ${attraction.avg_rating} (${attraction.no_of_ratings} ratings)</p>
+                                            <p><strong>Cost:</strong> ₹${attraction.node_average_cost}</p>
+                                            <p><strong>Mode of Transport:</strong> ${attraction.mode_of_transport_to_next_node}</p>
+                                        </div>
+                                        <div class="tags">
+                                            ${attraction.node_tags.map(tag => `<span>${tag}</span>`).join('')}
+                                        </div>
+                                    </div>
+                                `;
+                            });
+
+                            itineraryHtml += '</div>';
+                        });
+
+                        document.getElementById('itinerary').innerHTML = itineraryHtml;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('itinerary').innerHTML = 'Error fetching data.';
+                });
+        }
+
+        // Function to fetch hotel data when the button is clicked
+        function fetchHotelData() {
+            const hotelApiUrl = 'https://jokerscript.xyz/api/travel/hotel_place.php?place=chennai';
+
+            fetch(hotelApiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.statusCode === 200 && data.body) {
+                        const hotels = data.body;
+                        let hotelHtml = '<h2>Available Hotels in Chennai</h2><div class="itinerary-details">';
+
+                        hotels.forEach(hotel => {
+                            hotelHtml += `
+                                <div class="section">
+                                    <h3>${hotel.hotel_name}</h3>
+                                    <img src="${hotel.image_url[0]}" alt="${hotel.hotel_name}">
+                                    <div class="node-info">
+                                        <p><strong>Address:</strong> ${hotel.hotel_address}</p>
+                                        <p><strong>Price per Night:</strong> ₹${hotel.price_per_night}</p>
+                                        <p><strong>Rating:</strong> ${hotel.hotel_customer_rating} / 10</p>
+                                    </div>
+                                </div>
+                            `;
+                        });
+
+                        hotelHtml += '</div>';
+                        document.getElementById('hotel-list').innerHTML = hotelHtml;
+                    } else {
+                        document.getElementById('hotel-list').innerHTML = 'No hotels found or failed to fetch data.';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching hotels:', error);
+                    document.getElementById('hotel-list').innerHTML = 'Error fetching hotels.';
+                });
+        }
+
+        // Event listener for the "Fetch Hotels" button
+        document.getElementById('hotelButton').addEventListener('click', fetchHotelData);
+
+        // Initial call to fetch itinerary data (replace "cheyyar" with any other place if needed)
+        fetchData("cheyyar");
+
+    </script>
+
+</body>
+</html>

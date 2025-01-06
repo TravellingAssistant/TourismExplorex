@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .search-box {
+
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .search-box input {
+		box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+            width: 75%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid blue;
+            border-radius: 5px;
+        }
+
+        .search-box button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-box button:hover {
+            background-color: #0056b3;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+       
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .card-text {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .col-md-4 {
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .shbtn {
+            width: 25%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .username {
+            font-size: 18px;
+        }
+
+        .header .logout-btn {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .header .logout-btn:hover {
+            background-color: #c82333;
+        }
+
+        .header .package {
+            background-color: #fca400;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1;
+        }
+
+        #map {
+            height: 250px;
+            width: 100%;
+            margin-top: 0px;
+            display: none;
+            z-index: 0;
+            position: relative;
+        }
+
+        .loading-spinner {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+
+        /* Chatbot Styles */
+        .chatbot-btn {
+            position: fixed;
+            bottom: 70px;
+            right: 5px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .chatbox {
+            display: none;
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            width: 300px;
+            max-height: 80%;
+            height: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            padding: 10px;
+            overflow-y: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .chatbox-header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .chatbox-body {
+            overflow-y: auto;
+            height: 80%;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .chatbox-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .chatbox-footer input {
+            width: 80%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .chatbox-footer button {
+            width: 15%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .chatbox-footer button:hover {
+            background-color: #0056b3;
+        }
+		
+		.loader {
+    position: absolute;
+    margin-top: 5px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #333;
+}
+
+.loader::after {
+    content: '...';
+    animation: ellipsis 1s infinite;
+}
+
+@keyframes ellipsis {
+    0% {
+        content: '...';
+    }
+    33% {
+        content: '..';
+    }
+    66% {
+        content: '.';
+    }
+    100% {
+        content: '...';
+    }
+}
+/* General container for the itinerary */
+#itinerary-container {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+}
+
+/* Loader styles */
+.loader {
+    text-align: center;
+    font-size: 24px;
+    color: #007bff;
+    font-weight: bold;
+    margin: 50px 0;
+}
+
+/* Style for each attraction */
+.attraction {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Image container for attraction */
+.image-container {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.image-container img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Attraction header */
+.attraction-header h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Table styling for each attraction's details */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    width: 180px;
+    font-weight: bold;
+    color: #555;
+}
+
+td {
+    color: #444;
+}
+
+/* Cost style */
+.cost {
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* Rating style */
+.rating {
+    color: #ffd700;
+}
+
+/* Kilometer calculation */
+.km {
+    font-weight: bold;
+    color: #17a2b8;
+}
+
+/* Responsive design: Adjust layout for smaller screens */
+@media (max-width: 768px) {
+    .attraction {
+        padding: 15px;
+    }
+
+    .attraction-header h2 {
+        font-size: 20px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    .image-container img {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .attraction-header h2 {
+        font-size: 18px;
+    }
+
+    table {
+        font-size: 10px;
+    }
+
+    .loader {
+        font-size: 20px;
+    }
+}
+
+
+
+
+#hotelInfo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Loader */
+#loader {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 20px auto;
+    color: #007BFF;
+}
+
+/* Hotel Card Styling */
+.hotel-card {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 280px;
+    text-align: center;
+ 
+}
+
+
+
+.hotel-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.hotel-card h2 {
+    font-size: 1.2rem;
+    margin: 15px 0;
+    color: #333;
+}
+
+.hotel-card p {
+    font-size: 0.9rem;
+    margin: 8px 0;
+    color: #555;
+}
+
+.hotel-card a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.hotel-card a:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    #hotelInfo {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hotel-card {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+/* Recommended Hotels Section */
+#recommendedhotelCard {
+    text-align: center;
+    display: none; /* Initially hidden */
+}
+
+#recommendedhotelCard h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+.result-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+			max-height:200px;
+			overflow-y:auto;
+			width:75%;
+			box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .result-item p {
+            margin: 0;
+        }
+
+        .region-type {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+           /* Card Styling */
+           .detail-card {
+            width: 300px; /* Medium-sized card */
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+       
+
+    </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<div class="header">
+    <div class="username">
+        Welcome, User! {{name}}
+    </div>
+    <h1 class="text-center">Welcome to Tourism Explorex</h1>
+    <div>
+        <a href="#" class="package" data-bs-toggle="modal" data-bs-target="#registerModal">Packages</a>
+
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal for Package form -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Enter Your Requirements     </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/submit-package" method="POST">
+                    <div class="mb-3">
+                        <label for="destination" class="form-label">Destination Place Name :</label>
+                        <input type="text" class="form-control" id="destination" name="destination" autocomplete="off">
+
+                        <label for="destination" class="form-label">Travel Dates :</label>
+                        <input type="date" class="form-control" id="destination" name="date" autocomplete="off" required>
+
+                        <label for="destination" class="form-label">Travel Budget :</label>
+                        <input type="text" class="form-control" id="destination" name="amount" autocomplete="off" required>
+
+                        <label for="destination" class="form-label">Travel Group Size :</label>
+                        <input type="text" class="form-control" id="destination" name="size" autocomplete="off" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies (Popper, Bootstrap JS) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Main Dashboard Content -->
+<div class="container">
+    <!-- Search Box -->
+    <div class="search-box">
+        <input type="text" oninput="fetchLocations()" id="placeName" placeholder="Search for Destination..." autocomplete="off" class="form-control">
+        <button class="shbtn" onclick="searchLocation()">Search</button>
+		
+		 
+    </div>
+ <div id="result" class="result-container"></div>
+
+<div id="map"></div>
+   
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner">
+       
+        <p>Loading...</p>
+    </div>
+
+    <!-- Alert for Error or Success -->
+    <div id="alertContainer"></div>
+
+   
+        
+        <div style="display:flex;">
+
+            <div  id="recommendedPlaceCard"  >
+
+        </div><!-- Recommendation Card (Initially Hidden) -->
+
+  
+		
+</div>
+
+
+
+
+<div  id="recommendedhotelCard" >
+ 
+        
+      <div id="loader" style="display: none;">Loading...</div>
+
+
+</div>
+     
+
+
+
+<div id="vijay" style="display: none; justify-content: space-between; gap: 10px; padding: 10px;">
+    <!-- Left side: Recommended Place -->
+    <div style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 8px; background-color: #ffffff; height: max-content;">
+      <h5 style="color: #333;"><center><b>Recommended Place</b></center></h5>
+      <center><p>Near By Famus Place show here</p></center>
+    
+    
+      <div id="itinerary-container" >
+    
+      </div>
+    
+    
+    </div>
+
+    <!-- Right side: Recommended Hotel -->
+    <div style="flex: 3; padding: 10px; border: 1px solid #ccc; border-radius: 8px; background-color: #ffffff;">
+      <h5 style="color: #333;"><center><b>Recommended Hotel</b></center></h5>
+      <center><p>Near By Famus Hotels Show here</p></center>
+    
+      <div id="hotelInfo" ></div>
+    
+    </div>
+  </div>
+
+
+
+<!-- JavaScript -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+<script>
+// Variables for map and routing
+var mapInitialized = false;
+var map;
+var routeControl; // To hold the route
+
+// Function to initialize the map
+function initializeMap() {
+    map = L.map('map').setView([51.505, -0.09], 13); // Default to a position (latitude, longitude)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+}
+
+// Function to search location
+function searchLocation() {
+    
+    var place = document.getElementById('placeName').value.trim();
+    if (!place) {
+        showAlert('Please enter a valid place name.', 'danger');
+        return;
+    }
+
+    showLoading(true);
+
+    var url = `https://nominatim.openstreetmap.org/search?format=json&q=${place}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            showLoading(false);
+
+            if (data && data.length > 0) {
+                var lat = data[0].lat;
+                var lon = data[0].lon;
+                var placeName = data[0].display_name;
+
+                if (!mapInitialized) {
+                    initializeMap();
+                    mapInitialized = true;
+                }
+
+                // Set the map view to the searched location
+                map.setView([lat, lon], 13);
+                L.marker([lat, lon]).addTo(map)
+                    .bindPopup(`<b>${placeName}</b>`)
+                    .openPopup();
+
+                document.getElementById('map').style.display = 'block'; // Show map
+                map.invalidateSize(); // Adjust map size
+                showAlert(`Location found: ${place}`, 'success');
+
+                 // Show the recommended hotel card
+                document.getElementById('vijay').style.display = 'flex';
+				// Show the Recommended Place Card after search success
+                document.getElementById('vijay').style.display = 'flex';
+
+                // Create the route from the user's location (or a predefined location) to the searched place
+                getUserLocationAndCreateRoute([lat, lon]); // Use function to get user location and create the route
+
+            } else {
+                showAlert('Place not found. Try another location.', 'danger');
+                document.getElementById('recommendedPlaceCard').style.display = 'none'; // Hide if no result
+            }
+        })
+        .catch(error => {
+            showLoading(false);
+            showAlert('Error retrieving location. Please try again later.', 'danger');
+            document.getElementById('recommendedPlaceCard').style.display = 'none'; // Hide if error occurs
+        });
+		
+	
+	
+		
+				
+
+    // Function to fetch data for itinerary
+    var place = document.getElementById('placeName').value;
+	
+	// Fetch hotel data for a specific place when the page loads
+      
+    fetchHotelData(place); 
+			
+			
+			
+    fetch(`https://jokerscript.xyz/api/travel/famus_place.php?place=${place}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);  // Log the entire data response to verify its structure
+            renderItinerary(data);
+        })
+        .catch(error => {
+            document.getElementById('itinerary-container').textContent = 'Error fetching data: ' + error;
+        });
+
+    // Function to calculate the distance in kilometers between two sets of latitude and longitude
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371; // Radius of the Earth in kilometers
+        const dLat = (lat2 - lat1) * (Math.PI / 180); // Difference in latitude
+        const dLon = (lon2 - lon1) * (Math.PI / 180); // Difference in longitude
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const distance = R * c; // Distance in kilometers
+        return distance.toFixed(2); // Return distance rounded to two decimal places
+    }
+
+    // Function to convert time from 24-hour to 12-hour format with AM/PM
+    function convertTo12HourFormat(time) {
+        const [hours, minutes] = time.split(":");
+        let period = "AM";
+        let h = parseInt(hours);
+
+        if (h >= 12) {
+            period = "PM";
+            if (h > 12) h -= 12;
+        } else if (h === 0) {
+            h = 12;
+        }
+
+        return `${h}:${minutes} ${period}`;
+    }
+
+    // Function to render the itinerary dynamically with a loader
+    function renderItinerary(data) {
+        const itineraryContainer = document.getElementById("itinerary-container");
+
+        const loader = document.createElement("div");
+        loader.classList.add("loader");
+        loader.innerHTML = "Loading...";
+        itineraryContainer.innerHTML = '';
+        itineraryContainer.appendChild(loader);
+
+        setTimeout(() => {
+            const dayDetails = data.body.itinerary.subregions[0].daywise_details[0].itinerary_for_day;
+
+            let previousAttraction = null;
+
+            let itineraryHTML = '';
+
+            dayDetails.forEach(attraction => {
+                let attractionHTML = '';
+// Iterate through the attractions and create HTML dynamically
+attractionHTML += `
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: flex-start; margin-bottom: 20px;">
+        <div class="attraction" style="flex: 1 0 30%; min-width: 300px; max-width: 300px; box-sizing: border-box; margin-bottom: 20px; display: flex; flex-direction: column; border: 1px solid #ddd; border-radius: 10px; background-color: #fff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+            
+            <!-- Dynamically set the image source with fallback image if image URL is missing -->
+            <img src="${attraction.primary_image_url || 'https://www.cvent.com/sites/default/files/image/2021-08/exterior%20view%20of%20the%20sign%20at%20the%20front%20of%20a%20ho'}" 
+                alt="${attraction.node_name}" 
+                style="width: 100%; height: 200px; object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px;" />
+            
+            <div class="attraction-header" style="padding: 15px; text-align: center; background-color: #f8f8f8; border-bottom: 1px solid #ddd;">
+                <h2 style="font-size: 20px; font-weight: bold; color: #333; margin: 0;">${attraction.node_name}</h2>
+            </div>
+            
+            <div style="padding: 15px; flex-grow: 1;">
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
+                    <tr>
+                        <th style="text-align: left; padding: 8px 0; font-weight: bold; color: #555;">Arrival Time</th>
+                        <td style="padding: 8px 0; color: #777;">${convertTo12HourFormat(attraction.node_arrival_time)}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left; padding: 8px 0; font-weight: bold; color: #555;">Departure Time</th>
+                        <td style="padding: 8px 0; color: #777;">${convertTo12HourFormat(attraction.node_departure_time)}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left; padding: 8px 0; font-weight: bold; color: #555;">Cost</th>
+                        <td style="padding: 8px 0; color: #777;">₹${attraction.node_average_cost}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left; padding: 8px 0; font-weight: bold; color: #555;">Rating</th>
+                        <td style="padding: 8px 0; color: #777;">
+                            ${"★".repeat(Math.round(attraction.avg_rating))}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left; padding: 8px 0; font-weight: bold; color: #555;">Distance</th>
+                        <td style="padding: 8px 0; color: #777;">
+                            ${previousAttraction && previousAttraction.node_coordinates_deg.lat && previousAttraction.node_coordinates_deg.long 
+                                ? calculateDistance(
+                                    parseFloat(previousAttraction.node_coordinates_deg.lat), 
+                                    parseFloat(previousAttraction.node_coordinates_deg.long), 
+                                    parseFloat(attraction.node_coordinates_deg.lat), 
+                                    parseFloat(attraction.node_coordinates_deg.long)
+                                ) : "-"} KM
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+`;
+
+
+                itineraryHTML += attractionHTML;
+
+                previousAttraction = attraction;
+            });
+
+            itineraryContainer.innerHTML = itineraryHTML;
+        }, 2000);
+    }
+	
+
+}
+
+// Function to create and display the route from user's location to searched place
+function getUserLocationAndCreateRoute(destinationLatLon) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var userLat = position.coords.latitude;
+            var userLon = position.coords.longitude;
+
+            // Now create the route from the user's location to the destination
+            createRoute([userLat, userLon], destinationLatLon);
+
+        }, function(error) {
+            showAlert('Unable to retrieve your location. Error: ' + error.message, 'danger');
+            createRoute([51.505, -0.09], destinationLatLon);  // Fallback to default location if unable to get user location
+        });
+    } else {
+        showAlert('Geolocation is not supported by this browser.', 'danger');
+        createRoute([51.505, -0.09], destinationLatLon);  // Fallback to default location if geolocation is not supported
+    }
+}
+
+// Function to create and display the route
+function createRoute(startLatLon, endLatLon) {
+    if (routeControl) {
+        routeControl.remove(); // Remove existing route if any
+    }
+
+    // Create a route between the start and end points
+    routeControl = L.Routing.control({
+        waypoints: [
+            L.latLng(startLatLon[0], startLatLon[1]),
+            L.latLng(endLatLon[0], endLatLon[1])
+        ],
+        routeWhileDragging: true
+    }).addTo(map);
+}
+
+// Show or hide loading spinner
+function showLoading(isLoading) {
+    var spinner = document.querySelector('.loading-spinner');
+    spinner.style.display = isLoading ? 'block' : 'none';
+}
+
+// Show alert messages
+function showAlert(message, type) {
+    var alertContainer = document.getElementById('alertContainer');
+    alertContainer.innerHTML = `<div class="alert alert-${type}" role="alert">${message}</div>`;
+}
+
+
+ function fetchHotelData(place) {
+   const apiUrl = `https://jokerscript.xyz/api/travel/hotel_place.php?place=${place}`; // API URL with dynamic place
+    
+    // Show the loader while fetching data
+    document.getElementById('loader').style.display = 'block';
+    
+    // Hide the hotel info and recommended hotel card initially
+    document.getElementById("hotelInfo").innerHTML = '';
+    document.getElementById('recommendedhotelCard').style.display = 'none';
+
+    // Fetch data from the API
+    fetch(apiUrl)
+        .then(response => response.json()) // Parse the response as JSON
+        .then(data => {
+            console.log(data); // Output the response in the console
+
+            // Check if the response contains valid hotel data
+            if (data && data.body && Array.isArray(data.body) && data.body.length > 0) {
+                let hotelInfoHtml = '';
+                
+          // Iterate through the hotels and create HTML dynamically
+data.body.forEach(hotel => {
+    hotelInfoHtml += `
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-bottom: 20px; height: auto;">
+        <div class="hotel-card" style="flex: 1 0 30%; min-width: 350px; max-width: 350px; box-sizing: border-box; margin-bottom: 20px; display: flex; flex-direction: column; border: 1px solid #ddd; border-radius: 10px; background-color: #fff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+            
+            <!-- Hotel Image -->
+            <div class="image-container" style="margin-bottom: 10px;">
+                <img src="${hotel.image_url[0]}" alt="${hotel.hotel_name}" style="width: 150px; height: 100px; object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px; margin-top:30px;"/>
+            </div>
+            
+            <!-- Hotel Name and Information -->
+            <div style="padding: 15px; flex-grow: 1;">
+                <h5 style="font-size: 20px; font-weight: bold; color: #333; margin: 0; text-align: center;">${hotel.hotel_name}</h5>
+                
+                <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                    <tr>
+                        <th style="text-align: left; padding: 8px 0; font-weight: bold; color: #555;">Rating</th>
+                        <td style="padding: 8px 0; color: #777;">${hotel.hotel_customer_rating}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left; padding: 8px 0; font-weight: bold; color: #555;">Price per Night</th>
+                        <td style="padding: 8px 0; color: #777;">₹${hotel.price_per_night}</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left; padding: 8px 0; font-weight: bold; color: #555;">Distance from Center</th>
+                        <td style="padding: 8px 0; color: #777;">${hotel.distance_from_centroid_in_km.toFixed(2)} km</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="padding: 8px 0; text-align: center; ">
+                            <a href="${hotel.hotel_url}" target="_blank" style="color: white; text-decoration: none;">View on Booking.com</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    `;
+});
+
+
+
+                // Update the hotel info div with the dynamically generated content
+                document.getElementById("hotelInfo").innerHTML = hotelInfoHtml;
+
+                // Hide the loader after data is fetched
+                document.getElementById('loader').style.display = 'none';
+                
+                // Show the recommended hotel card
+               // document.getElementById('recommendedhotelCard').style.display = 'block';
+            } else {
+                // Display message if no hotels found
+                document.getElementById("hotelInfo").innerHTML = 'No hotels found for this place.';
+                document.getElementById('loader').style.display = 'none';
+            }
+        })
+        .catch(error => {
+            // Handle any error that occurs during the fetch
+            console.error("Error fetching data:", error);
+            document.getElementById("hotelInfo").innerHTML = `Error: ${error.message}`;
+
+            // Hide the loader after error
+            document.getElementById('loader').style.display = 'none';
+        });
+}
+
+
+        
+  
+        // Function to fetch locations based on user input
+        function fetchLocations() {
+            const query = document.getElementById('placeName').value.trim();
+            if (query.length === 0) {
+                document.getElementById('result').innerHTML = ''; // Clear results if input is empty
+                return;
+            }
+
+            // URL of the API endpoint with dynamic query
+            const url = `https://jokerscript.xyz/api/travel/auto.php?auto=${query}`;
+
+            // Make a GET request using fetch
+            fetch(url)
+                .then(response => response.json())  // Convert the response to JSON
+                .then(data => {
+                    // Get the div where the result will be displayed
+                    const resultDiv = document.getElementById('result');
+
+                    // Check if data is available and display it
+                    if (data && data.body && data.body.length > 0) {
+                        let output = ''; // Create a string to hold the results
+                        
+                        // Loop through the data and create result items
+                        data.body.forEach(item => {
+                            const primaryText = item.searchResultStruct.primaryText;
+                            const secondaryText = item.searchResultStruct.secondaryText;
+                            const regionType = item.searchResultStruct.regionTypeTag;
+
+                            output += `
+                                <div class="result-item" onclick="selectLocation('${primaryText}')">
+                                    <div>
+                                        <p><strong>${primaryText}</strong></p>
+                                        <p>${secondaryText}</p>
+                                    </div>
+                                    <p class="region-type">${regionType}</p>
+                                </div>
+                            `;
+                        });
+
+                        resultDiv.innerHTML = output; // Inject the result into the HTML
+                    } else {
+                        resultDiv.innerHTML = '<p>No locations found.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('result').innerHTML = '<p>Failed to load data.</p>';
+                });
+        }
+
+        // Function to set the selected location into the input field
+        function selectLocation(location) {
+            // Remove everything after the comma (if exists) and set only the part before the comma
+            const cleanLocation = location.split(',')[0].trim(); // Get the text before the comma
+            document.getElementById('placeName').value = cleanLocation; // Set cleaned location in input field
+            document.getElementById('result').innerHTML = ''; // Clear the result container
+        }
+    </script>
+
+
+
