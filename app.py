@@ -21,7 +21,7 @@ app.secret_key = "vijay"
 MYSQL_HOST = "brow9lqutiwrruahzy6j-mysql.services.clever-cloud.com"
 MYSQL_PORT = "3306"
 MYSQL_USER = "udefe2bkflhfhjl7"  # replace with your MySQL username
-MYSQL_PASSWORD = "gl9H6qwdjVQl3SbQqqmc"  # replace with your MySQL password
+MYSQL_PASSWORD = "kAHob4Qwc5fUE86r8jve"  # replace with your MySQL password
 MYSQL_DB = "tourism"  # replace with your MySQL database name
 
 # Google OAuth details
@@ -253,5 +253,6 @@ def protected_area():
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8080))  # Default to 8080 if PORT is not set
+    port = int(os.environ.get("PORT",
+                              8080))  # Default to 8080 if PORT is not set
     app.run(host='0.0.0.0', port=port)
