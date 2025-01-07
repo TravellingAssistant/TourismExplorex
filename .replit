@@ -14,3 +14,8 @@ externalPort = 8000
 [[ports]]
 localPort = 8080
 externalPort = 80
+
+[[ports]]
+localPort = 9000
+externalPort = 9000
+exposeLocalhost = true
