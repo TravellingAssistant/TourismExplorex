@@ -182,7 +182,7 @@ def login_with_google():
     # Initiates the Google login process
     authorization_url, state = flow.authorization_url()
     session["state"] = state
-    return redirect(authorization_url)
+    return redirect("/protected_area")
 
 
 @app.route("/callback")
