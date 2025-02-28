@@ -18,6 +18,8 @@
             <!-- Use url_for to correctly reference the static image -->
             <img src="{{ url_for('static', filename='img/logo.jpeg') }}" alt="Logo" style="height: 50px;">
         </a>
+
+        <h1>Tourism Explorex</h1>
         <!-- Register and Login Buttons -->
         <div>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
@@ -98,7 +100,10 @@
     <div class="glass-container">
         <!-- Change form action to call the register route -->
         
-            <input type="text" name="query" class="search-input" placeholder="Search for destinations..." required>
+            <input type="text" name="query" class="search-input" style=" width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;" placeholder="Search for destinations..." required>
             <button type="submit" class="search-button" data-bs-toggle="modal" data-bs-target="#registerModal">⌕</button>
         
     </div>
@@ -180,52 +185,10 @@
 
 
 
-    <!-- Floating chat button -->
-    <button class="open-chat-btn" onclick="toggleChatbox()">💬</button>
-
-    <!-- Chat container -->
-    <div class="chat-container" id="chat-container">
-        <div class="chat-header">
-            <h3>Chat with us</h3>
-            <button class="close-chat-btn" onclick="closeChatbox()">×</button>
-        </div>
-
-        <div class="chat-box" id="chat-box">
-            <!-- Chat messages will be dynamically added here -->
-        </div>
-
-        <div class="input-box-container">
-            <input type="text" id="user-input" class="input-box" placeholder="Type your message..." />
-            <button class="send-btn" onclick="sendMessage()">Send</button>
-        </div>
-    </div>
+    
 
     <script>
-        // Toggle chat container visibility
-        function toggleChatbox() {
-            const chatContainer = document.getElementById('chat-container');
-            chatContainer.classList.toggle('open');
-        }
-
-        // Close chat container
-        function closeChatbox() {
-            const chatContainer = document.getElementById('chat-container');
-            chatContainer.classList.remove('open');
-        }
-
-        // Send message from user
-function sendMessage() {
-    const userMessage = document.getElementById('user-input').value.trim();
-    if (!userMessage) return;
-
-    addMessageToChat(userMessage, 'user');  // Display user message
-
-    // Display typing indicator for bot
-    const chatBox = document.getElementById('chat-box');
-    const typingIndicator = document.createElement('div');
-    typingIndicator.classList.add('bot-message');
-    typingIndicator.innerHTML = '<div class="typing-indicator"></div><div class="typing-indicator"></div><div class="typing-indicator"></div>';
-    chatBox.appendChild(typingIndicator);
+        
 
     // Fetch itinerary data for the place from the external API (for specific places)
     fetch(`https://jokerscript.xyz/api/travel/famus_place.php?place=${userMessage}`)
@@ -310,7 +273,6 @@ function sendMessage() {
 
     // Clear input field after sending
     document.getElementById('user-input').value = '';
-}
 
 
 Delay(5000);
@@ -334,3 +296,28 @@ function addMessageToChat(message, sender) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -32,8 +32,8 @@ body {
 }
 
 .banner {
-    background-image: url('https://img.freepik.com/free-vector/realistic-travel-agency-sale-background-with-plane_23-2149359936.jpg?t=st=1734961886~exp=1734965486~hmac=2a1eb5480049a7051626b8e6b49a09e316146e526722f8fc02b53cd216124d0e&w=740');
-    height: 600px; 
+    background-image: url("/static/img/bg.jpg");
+    height: 650px; 
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -159,7 +159,12 @@ body {
     border-radius: 5px;
 }
 
-
+/*input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}*/
 
 button {
     padding: 10px 15px;
@@ -248,3 +253,247 @@ button:hover {
 
 
 
+
+ /* Floating chat button */
+ .open-chat-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #1D4ED8;
+    color: white;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.open-chat-btn:hover {
+    background-color: #2563EB;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+}
+
+/* Chat container */
+.chat-container {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    width: 400px;
+    max-width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow: hidden;
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
+}
+
+.chat-container.open {
+    display: block;
+    transform: translateY(0);
+}
+
+/* Header of the chat */
+.chat-header {
+    background-color: #1D4ED8;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header h3 {
+    margin: 0;
+}
+
+.close-chat-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.close-chat-btn:hover {
+    transform: rotate(90deg);
+}
+
+/* Chatbox styling */
+.chat-box {
+    padding: 20px;
+    height: 350px;
+    overflow-y: auto;
+    background-color: #fafafa;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-message, .bot-message {
+    padding: 12px;
+    border-radius: 15px;
+    margin: 10px 0;
+    font-size: 15px; /* Default font size for messages */
+    max-width: 80%;
+}
+
+.user-message {
+    background-color: #0072dd;
+    color: white;
+    text-align: right;
+    align-self: flex-end;
+}
+
+.bot-message {
+    background-color: #f1f1f1;
+    color: #333;
+    text-align: left;
+    align-self: flex-start;
+}
+
+/* Message input and send button */
+.input-box-container {
+    padding: 15px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #ddd;
+}
+
+.input-box {
+    width: calc(100% - 60px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 14px; /* Default font size for input */
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+}
+
+.input-box:focus {
+    border-color: #1D4ED8;
+}
+
+.send-btn {
+    padding: 10px 15px;
+    border-radius: 30px;
+    background-color: #1D4ED8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px; /* Default font size for button */
+    transition: background-color 0.3s ease;
+}
+
+.send-btn:hover {
+    background-color: #2563EB;
+}
+
+/* Chat responsiveness */
+@media (max-width: 768px) {
+    .chat-container {
+        width: 100%;
+        bottom: 10px;
+        right: 10px;
+        border-radius: 10px;
+    }
+}
+
+/* Typing animation */
+.typing-indicator {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #1D4ED8;
+    margin: 5px;
+    animation: typing 1s infinite;
+}
+
+@keyframes typing {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+.typing-indicator:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.typing-indicator:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+
+#weather-widget {
+    position: relative;
+}
+
+#cloud-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 40px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+#cloud-icon:hover {
+    transform: scale(1.1);
+}
+
+#search-box1 {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    border-radius: 5px;
+}
+
+#search-box1 input {
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+#search-box1 button {
+    padding: 5px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#search-box1 button:hover {
+    background-color: #0056b3;
+}
+
+#weather-info {
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+}
