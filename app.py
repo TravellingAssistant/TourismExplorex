@@ -550,7 +550,7 @@ def show_reviews():
     return render_template('reviews.html', reviews=reviews, attraction_name=attraction_name)
 
 
-MODEL_FILE = "backend\ml.pkl"
+MODEL_FILE = "backend/ml.pkl"
 
 # Load the model
 model = pickle.load(open(MODEL_FILE, 'rb'))
