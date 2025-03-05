@@ -26,13 +26,16 @@ from bs4 import BeautifulSoup
 
 app = Flask("Google Login App")
 app.secret_key = "vijay"
+RENDER_APP_NAME = os.environ.get("RENDER_APP_NAME")
+RENDER_APP_URL = f"https://{RENDER_APP_NAME}.onrender.com"
+REDIRECT_URI = f"{RENDER_APP_URL}/callback"
 
 # MySQL connection details
-MYSQL_HOST = "brow9lqutiwrruahzy6j-mysql.services.clever-cloud.com"
-MYSQL_PORT = "3306"
-MYSQL_USER = "udefe2bkflhfhjl7"  # replace with your MySQL username
-MYSQL_PASSWORD = "kAHob4Qwc5fUE86r8jve"  # replace with your MySQL password
-MYSQL_DB = "brow9lqutiwrruahzy6j"  # replace with your MySQL database name
+MYSQL_HOST = os.environ.get("MYSQL_HOST")
+MYSQL_PORT = os.environ.get("MYSQL_PORT")
+MYSQL_USER = os.environ.get("MYSQL_USER")  # replace with your MySQL username
+MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD")  # replace with your MySQL password
+MYSQL_DB = os.environ.get("MYSQL_DB")  # replace with your MySQL database name
 
 # Google OAuth details
 GOOGLE_CLIENT_ID = "282021514569-pdsnov6vqp2cegkj271cvdcs87ogj4q5.apps.googleusercontent.com"
@@ -42,7 +45,7 @@ client_secrets_file = os.path.join(os.path.dirname(__file__), "client_secret.jso
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="http://127.0.0.1:5000/callback"
+    redirect_uri=f"{RENDER_APP_URL}/callback"
 )
 
 # Allow insecure transport (only for local development)
@@ -442,10 +445,10 @@ def send_email(
     subject='Default Subject',  # Default subject
     message_body='This is a default message.'  # Default message body
 ):
-    SMTP_SERVER = 'smtp.gmail.com'  # For Gmail SMTP
-    SMTP_PORT = 587
-    EMAIL_ADDRESS = 'golivijaykumar2003@gmail.com'  # Your email
-    EMAIL_PASSWORD = 'ldmz xvha pybm yewk'  # Your app password
+    SMTP_SERVER = os.environ.get("SMTP_SERVER")  # For Gmail SMTP
+    SMTP_PORT = os.environ.get("SMTP_PORT")
+    EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")  # Your email
+    EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")  # Your app password
 
     try:
         # Create Email
