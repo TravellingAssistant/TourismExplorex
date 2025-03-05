@@ -663,8 +663,8 @@ def result():
     return render_template('package.html', cost=cost)
 
 
-if __name__ == "__main__":
-    create_tables()  # Create the tables when the application starts
-    app.run(debug=True)  # Local development server (HTTP allowed)
+
+create_tables()  
+
 
  
